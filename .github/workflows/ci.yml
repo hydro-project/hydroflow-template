@@ -42,7 +42,7 @@ jobs:
           name: ${{ env.PROJECT_NAME }}
 
       - name: Move generated project
-      - run: |
+        run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
 
       - name: Run cargo check
