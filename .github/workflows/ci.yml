@@ -36,27 +36,35 @@ jobs:
           toolchain: nightly
           components: rustfmt, clippy
 
+      - name: Install Action cargo-generate
+        uses: cargo-generate/cargo-generate-action@v0.17
+        with:
+          name: ${{ env.PROJECT_NAME }}
+
+      - name: Move generated project
+      - run: |
+          mv $PROJECT_NAME ${{ runner.temp }}/
+
       - name: Run cargo check
         uses: actions-rs/cargo@v1
         with:
           command: check
-          args: --all-targets
+          args: --manifest-path "${{ runner.temp }}" --all-targets
 
       - name: Run cargo fmt
         uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --all -- --check
+          args: --manifest-path "${{ runner.temp }}"  --all -- --check
 
       - name: Run cargo clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --all --all-targets -- -D warnings
+          args: --manifest-path "${{ runner.temp }}"  --all --all-targets -- -D warnings
 
-      # Aren't actually any tests (yet)
       - name: Run cargo test
         uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --all-targets --no-fail-fast
+          args: --manifest-path "${{ runner.temp }}"  --all-targets --no-fail-fast
