@@ -37,7 +37,7 @@ jobs:
           components: rustfmt, clippy
 
       - name: Install Action cargo-generate
-        uses: cargo-generate/cargo-generate-action@v0.17
+        uses: cargo-generate/cargo-generate-action@v0.17.5
         with:
           name: ${{ env.PROJECT_NAME }}
 
