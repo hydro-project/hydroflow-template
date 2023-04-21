@@ -39,10 +39,10 @@ jobs:
       - name: Install Action cargo-generate
         uses: cargo-generate/cargo-generate-action@v0.17.5
         with:
-          name: .generated
+          name: gendir
       - name: Move generated project
         run: |
-          mv .generated ${{ runner.temp }}/
+          mv gendir ${{ runner.temp }}/
 
       - name: Run cargo check
         uses: actions-rs/cargo@v1
