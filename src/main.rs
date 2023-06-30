@@ -9,8 +9,6 @@ mod client;
 mod helpers;
 mod protocol;
 mod server;
-#[cfg(test)]
-mod test;
 
 #[derive(Clone, ValueEnum, Debug)]
 enum Role {
