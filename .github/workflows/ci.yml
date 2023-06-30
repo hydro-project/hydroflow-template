@@ -87,7 +87,7 @@ jobs:
 
           sleep 1
 
-          if cat client-output | grep -q "$ECHO_STRING eeeeee"; then
+          if cat client-output | grep -q "$ECHO_STRING"; then
               exit 0
           else
               exit -1
