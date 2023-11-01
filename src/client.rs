@@ -1,4 +1,3 @@
-use crate::helpers::print_graph;
 use crate::protocol::Message;
 use crate::Opts;
 use chrono::prelude::*;
@@ -34,7 +33,10 @@ pub(crate) async fn run_client(outbound: UdpSink, inbound: UdpStream, opts: Opts
     };
 
     if let Some(graph) = opts.graph {
-        print_graph(&flow, graph);
+        let serde_graph = flow
+            .meta_graph()
+            .expect("No graph found, maybe failed to parse.");
+        serde_graph.open_graph(graph, opts.write_config).unwrap();
     }
 
     flow.run_async().await;

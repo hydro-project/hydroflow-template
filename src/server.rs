@@ -1,4 +1,3 @@
-use crate::helpers::print_graph;
 use crate::protocol::Message;
 use chrono::prelude::*;
 use hydroflow::hydroflow_syntax;
@@ -42,7 +41,10 @@ pub(crate) async fn run_server(outbound: UdpSink, inbound: UdpStream, opts: crat
     };
 
     if let Some(graph) = opts.graph {
-        print_graph(&flow, graph);
+        let serde_graph = flow
+            .meta_graph()
+            .expect("No graph found, maybe failed to parse.");
+        serde_graph.open_graph(graph, opts.write_config).unwrap();
     }
 
     // run the server
