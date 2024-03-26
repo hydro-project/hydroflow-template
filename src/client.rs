@@ -9,7 +9,6 @@ use std::net::SocketAddr;
 /// Runs the client. The client is a long-running process that reads stdin, and sends messages that
 /// it receives to the server. The client also prints any messages it receives to stdout.
 pub(crate) async fn run_client(opts: Opts) {
-
     // Client listens on a port picked by the OS.
     let client_addr = ipv4_resolve("localhost:0").unwrap();
 
@@ -62,7 +61,10 @@ pub(crate) async fn run_client(opts: Opts) {
 
     // If a graph was requested to be printed, print it.
     if let Some(graph) = opts.graph {
-        print_graph(&flow, graph);
+        let serde_graph = flow
+            .meta_graph()
+            .expect("No graph found, maybe failed to parse.");
+        serde_graph.open_graph(graph, opts.write_config).unwrap();
     }
 
     // Run the client. This is an async function, so we need to await it.

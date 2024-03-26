@@ -5,10 +5,12 @@ use serde::{Deserialize, Serialize};
 /// and `Deserialize` traits allow for serialization by the `serde` crate.
 #[derive(PartialEq, Clone, Serialize, Deserialize, Debug)]
 pub enum Message {
-
     /// Echo message contains a string payload, and a timestamp at which the message was
     /// constructed.
-    Echo { payload: String, ts: DateTime<Utc> },
+    Echo {
+        payload: String,
+        ts: DateTime<Utc>,
+    },
 
     /// Heartbeat messages carry no information other than their type.
     Heartbeat,
