@@ -67,13 +67,6 @@ enum Role {
     Server,
 }
 
-/// Optionally, the application can print a graph representation
-#[derive(Clone, ValueEnum, Debug)]
-pub enum GraphType {
-    Mermaid,
-    Dot,
-}
-
 /// The default server address & port on which the server listens for incoming messages. Clients
 /// send message to this address & port.
 pub const DEFAULT_SERVER_ADDRESS: &str = "localhost:54321";

@@ -57,7 +57,7 @@ In our experience, when starting a Hydroflow project we recommend a four-step ap
 2. **Messages**: Define the basic message types that services will send to each other (in the `Message` enum in `src/protocol.rs`).
 3. **Print Received Messages**: Utilize the template logic at each service that prints out messages received. 
 4. **Exercise Sending Patterns**:  Make sure the right messages get to the right recipients! Write simple logic to send out messages in all the message patterns you expect to see (in the `src/<role>.rs` files).
-5. **Service Programming**: Begin writing the actual logic for each service, with plenty of `for_each(|m| println!("{:?}", m))` operators 
+5. **Service Programming**: Begin writing the actual logic for each service, with plenty of `inspect(|m| println!("{:?}", m))` operators 
 peppered throughout!
 
 Have fun!
